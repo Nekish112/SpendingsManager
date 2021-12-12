@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" th:fragment="layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:include="this::header"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/images/profits.png">
+</head>
+<body>
+
+<script src="https://use.fontawesome.com/750b091ed5.js"></script>
+
+<h1>Менеджер расходов</h1>
+<div th:include="this::content"/>
+
+</body>
+</html>

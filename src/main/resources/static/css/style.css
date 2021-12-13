@@ -92,10 +92,6 @@ form selectactive, form inputactive {
   border: 1px solid #4FC1E9;
   transition: 0.2s ease;
 }
-form div {
-  display: inline-block;
-  margin-right: 10px;
-}
 form span {
   font-size: 1.3em;
   font-weight: 100;

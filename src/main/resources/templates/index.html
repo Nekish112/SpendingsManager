@@ -18,14 +18,14 @@
             <option th:each="paymentType : ${paymentTypes}" th:value="${paymentType.name()}" th:text="${paymentType.getLabel()}"></option>
         </select>
     </div>
-
+    <br>
     <div>
       <span>Что:</span>
         <select name="spendingType">
             <option th:each="spendingType : ${spendingTypes}" th:value="${spendingType.name()}" th:text="${spendingType.getLabel()}"></option>
         </select>
     </div>
-  
+    <br>
     <div>
       <span>Дата:</span> <input type="date" name="spendingDate">
     </div>

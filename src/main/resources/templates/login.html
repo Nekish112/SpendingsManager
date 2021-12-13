@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:fragment="content">
-    <h2>Login page</h2>
+    <h2>Let's start planning!</h2>
     <br>
     <div th:if="${param.error}">
         Invalid username or password.
@@ -24,10 +24,14 @@
         <br>
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <br>
-        <div><input type="submit" value="Sign In"/></div>
+        <div>
+            <button class="btn waves-effect waves-main" type="submit" name="action">Sign In
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
     </form>
     <br>
-    <a href="/registration">Add new spender</a>
+    <p>You can <a href="/registration">add new spender</a> if you are not registered yet.</p>
 </div>
 </body>
 </html>

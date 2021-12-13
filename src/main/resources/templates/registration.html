@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       th:include="layout::layout">
 <head>
-    <title th:fragment="header">Registration</title>
+    <title th:fragment="header">Let's became a saver!</title>
 </head>
 <body>
 <div th:fragment="content">
@@ -22,7 +22,11 @@
         <br>
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <br>
-        <div><input type="submit" value="Register"/></div>
+        <div>
+            <button class="btn waves-effect waves-main" type="submit" name="action">Register
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
     </form>
 </div>
 </body>

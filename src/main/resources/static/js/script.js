@@ -1,5 +1,5 @@
 $(document).ready(function (){
-
+  $('select').formSelect();
   let $name = $('select[name="spendingType"] option:selected');
   let $amount = $('input[name="spendingAmount"]');
   let $type = $('select[name="paymentType"]');

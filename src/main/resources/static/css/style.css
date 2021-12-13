@@ -124,3 +124,7 @@ form span {
   margin-left: 30px;
   display: inline-flex !important;
 }
+
+.waves-effect.waves-main .waves-ripple {
+  background-color: #56CC59;
+}

@@ -70,34 +70,34 @@ table td {
   box-shadow: 0 0;
 }
 
-#form-box {
-  width: 650px;
-  margin: 30px auto;
-  padding-left: 15px;
-}
+/*#form-box {*/
+/*  width: 650px;*/
+/*  margin: 30px auto;*/
+/*  padding-left: 15px;*/
+/*}*/
 
-form {
-  color: #fff;
-  margin: auto;
-}
-form select, form input {
-  margin-bottom: 25px;
-  color: #434A54;
-  padding: 10px;
-  width: 200px;
-  border-radius: 3px;
-  border: 0;
-}
-form selectactive, form inputactive {
-  border: 1px solid #4FC1E9;
-  transition: 0.2s ease;
-}
-form span {
-  font-size: 1.3em;
-  font-weight: 100;
-  display: inline-block;
-  width: 100px;
-}
+/*form {*/
+/*  color: #fff;*/
+/*  margin: auto;*/
+/*}*/
+/*form select, form input {*/
+/*  margin-bottom: 25px;*/
+/*  color: #434A54;*/
+/*  padding: 10px;*/
+/*  width: 200px;*/
+/*  border-radius: 3px;*/
+/*  border: 0;*/
+/*}*/
+/*form selectactive, form inputactive {*/
+/*  border: 1px solid #4FC1E9;*/
+/*  transition: 0.2s ease;*/
+/*}*/
+/*form span {*/
+/*  font-size: 1.3em;*/
+/*  font-weight: 100;*/
+/*  display: inline-block;*/
+/*  width: 100px;*/
+/*}*/
 
 #type {
   width: 50px;

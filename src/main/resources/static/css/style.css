@@ -7,7 +7,7 @@
 }
 
 h1, h2 {
-  color: #F5F7FA;
+  /*color: #F5F7FA;*/
   text-align: center;
 }
 
@@ -22,7 +22,7 @@ h2 {
 }
 
 body {
-  background: #A0D468;
+  /*background: #A0D468;*/
 }
 
 table {
@@ -122,4 +122,9 @@ form span {
 .center {
   margin: auto;
   text-align: center;
+}
+
+.brand-logo {
+  margin-left: 30px;
+  display: inline-flex !important;
 }

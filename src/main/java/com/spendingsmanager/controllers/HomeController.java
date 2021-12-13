@@ -26,16 +26,10 @@ import java.util.Map;
 public class HomeController {
 
     @Autowired
-    private SpenderRepository spenderRepository;
-
-    @Autowired
-    private SpendingRepository spendingRepository;
-
-    @Autowired
     private SpendingsService spendingsService;
 
     @GetMapping({"/"})
-    public String welcomeAsHTML(Principal principal, Map<String, Object> model) {
+    public String getSpendings(Principal principal, Map<String, Object> model) {
         model.put("paymentTypes", PaymentType.values());
         model.put("spendingTypes", SpendingType.values());
         try {
@@ -54,12 +48,12 @@ public class HomeController {
                              @RequestParam("spendingType") String spendingType,
                              @RequestParam("amount") String spendingAmount,
                              @RequestParam("paymentType") String paymentType,
-                             @RequestParam("date") String spendingDate) throws ParseException {
-        Spender spender = spenderRepository.findByUsername(principal.getName());
-
-        Spending spending = new Spending(spender, paymentType,
-                spendingType, spendingDate, spendingAmount);
-
-        spendingRepository.save(spending);
+                             @RequestParam("date") String spendingDate,
+                             Map<String, Object> model) {
+        try {
+            spendingsService.save(principal.getName(), spendingType, spendingAmount, paymentType, spendingDate);
+        } catch (ValidationException ex) {
+            model.put("saveSpendingException", ex.getMessage());
+        }
     }
 }

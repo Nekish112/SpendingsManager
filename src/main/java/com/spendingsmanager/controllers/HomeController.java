@@ -6,12 +6,15 @@ import com.spendingsmanager.entities.PaymentType;
 import com.spendingsmanager.entities.Spender;
 import com.spendingsmanager.entities.Spending;
 import com.spendingsmanager.entities.SpendingType;
+import com.spendingsmanager.services.SpendingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.security.validator.ValidatorException;
 
+import javax.validation.ValidationException;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.text.ParseException;
@@ -28,16 +31,19 @@ public class HomeController {
     @Autowired
     private SpendingRepository spendingRepository;
 
+    @Autowired
+    private SpendingsService spendingsService;
+
     @GetMapping({"/"})
     public String welcomeAsHTML(Principal principal, Map<String, Object> model) {
         model.put("paymentTypes", PaymentType.values());
         model.put("spendingTypes", SpendingType.values());
-
-        Spender spender = spenderRepository.findByUsername(principal.getName());
-
-        List<Spending> spendings = spendingRepository.findBySpender(spender);
-
-        model.put("spendings", spendings);
+        try {
+            List<Spending> spendings = spendingsService.findByUsername(principal.getName());
+            model.put("spendings", spendings);
+        } catch (ValidationException ex) {
+            model.put("spendingsException", ex.getMessage());
+        }
 
         return "index";
     }

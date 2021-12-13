@@ -1,8 +1,9 @@
-package com.spendingsmanager.controllers;
+package com.spendingsmanager.controllers.security;
 
 import com.spendingsmanager.dao.SpenderRepository;
 import com.spendingsmanager.entities.Role;
 import com.spendingsmanager.entities.Spender;
+import com.spendingsmanager.services.security.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,9 @@ public class RegistrationController {
     @Autowired
     private SpenderRepository spenderRepository;
 
+    @Autowired
+    private RegistrationService registrationService;
+
     @GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -26,18 +30,13 @@ public class RegistrationController {
     public String addSpender(Spender spender, Map<String, Object> model) {
         List<Object> errors = new ArrayList<>();
 
-        Spender spenderFromDb = spenderRepository.findByUsername(spender.getUsername());
-
-        if (spenderFromDb != null) {
-            errors.add("Spender exists!");
+        try {
+            registrationService.addSpender(spender);
+        } catch (Exception ex) {
+            errors.add(ex.getMessage());
             model.put("errors", errors);
             return registration();
         }
-
-        spender.setActive(true);
-        spender.setRoles(Collections.singleton(Role.USER));
-        spenderRepository.save(spender);
-
         return "redirect:/login";
     }
 

@@ -25,9 +25,6 @@ public abstract class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Spending> spendings;
-
     public Long getId() {
         return id;
     }
@@ -66,13 +63,5 @@ public abstract class User {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public Set<Spending> getSpendings() {
-        return spendings;
-    }
-
-    public void setSpendings(Set<Spending> spendings) {
-        this.spendings = spendings;
     }
 }

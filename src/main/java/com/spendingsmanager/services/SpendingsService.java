@@ -3,10 +3,9 @@ package com.spendingsmanager.services;
 import com.spendingsmanager.dao.SpendingRepository;
 import com.spendingsmanager.entities.Spender;
 import com.spendingsmanager.entities.Spending;
-import com.spendingsmanager.services.validators.StandardValidator;
+import com.spendingsmanager.base.services.validators.StandardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

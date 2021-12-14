@@ -1,5 +1,6 @@
 package com.spendingsmanager.services.validators;
 
+import com.spendingsmanager.base.services.validators.StandardValidator;
 import com.spendingsmanager.entities.Spending;
 import org.springframework.stereotype.Service;
 

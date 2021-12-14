@@ -1,16 +1,28 @@
 package com.spendingsmanager.base.services;
 
-import com.spendingsmanager.base.entities.security.StandardEntity;
+import com.spendingsmanager.base.entities.StandardEntity;
 import com.spendingsmanager.base.entities.security.User;
+import com.spendingsmanager.base.repositories.StandardDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 public abstract class StandardDomainService<T extends StandardEntity> extends StandardService<T> {
 
-    @Autowired
-    protected StandardUserService standardUserService;
+    public List<T> findAllByUser(User user) {
+        List<T> entities = null;
 
-    public abstract T findByUser(String username);
+        if (user != null) {
+            entities = getRepository().findByUser(user);
+        }
+
+        return entities;
+    }
+
+    public List<T> findAllByUsername(String username) {
+        User user = getStandardUserService().findByUsername(username);
+        return findAllByUser(user);
+    }
 
     @Override
     public void save(String username, T entity) {
@@ -23,11 +35,7 @@ public abstract class StandardDomainService<T extends StandardEntity> extends St
         getRepository().save(entity);
     }
 
-    protected abstract void validateBeforeSave(T entity);
+    protected abstract StandardUserService getStandardUserService();
 
-    protected StandardUserService getStandardUserService() {
-        return standardUserService;
-    }
-
-    protected abstract JpaRepository<T, Long> getRepository();
+    protected abstract StandardDomainRepository<T> getRepository();
 }

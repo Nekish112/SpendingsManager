@@ -1,16 +1,15 @@
 package com.spendingsmanager.services;
 
+import com.spendingsmanager.base.repositories.StandardDomainRepository;
+import com.spendingsmanager.base.services.StandardDomainService;
+import com.spendingsmanager.base.services.StandardUserService;
 import com.spendingsmanager.dao.SpendingRepository;
-import com.spendingsmanager.entities.Spender;
-import com.spendingsmanager.entities.Spending;
 import com.spendingsmanager.base.services.validators.StandardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class SpendingsService {
+public class SpendingsService extends StandardDomainService {
     
     @Autowired
     private SpendingRepository spendingRepository;
@@ -20,29 +19,19 @@ public class SpendingsService {
 
     @Autowired
     private StandardValidator spendingValidatorService;
-    
-    public List<Spending> findByUsername(String username) {
 
-        List<Spending> spendings = null;
-        
-        Spender spender = spenderService.findByUsername(username);
-        
-        if (spender != null) {
-            spendings = spendingRepository.findBySpender(spender);
-        }
-        
-        return spendings;
+    @Override
+    protected StandardUserService getStandardUserService() {
+        return spenderService;
     }
 
-    public void save(String username, String spendingType,
-                     String spendingAmount, String paymentType, String spendingDate) {
-        Spender spender = spenderService.findByUsername(username);
+    @Override
+    protected StandardDomainRepository getRepository() {
+        return spendingRepository;
+    }
 
-        Spending spending = new Spending(spender, paymentType,
-                spendingType, spendingDate, spendingAmount);
-
-        spendingValidatorService.validate(spending);
-
-        spendingRepository.save(spending);
+    @Override
+    protected void validateBeforeSave(Object entity) {
+        spendingValidatorService.validate(entity);
     }
 }

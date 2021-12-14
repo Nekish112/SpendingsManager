@@ -1,6 +1,6 @@
 package com.spendingsmanager.services.security;
 
-import com.spendingsmanager.entities.Role;
+import com.spendingsmanager.base.entities.security.roles.Role;
 import com.spendingsmanager.entities.Spender;
 import com.spendingsmanager.services.SpenderService;
 import org.springframework.beans.factory.annotation.Autowired;

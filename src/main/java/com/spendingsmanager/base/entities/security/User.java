@@ -1,7 +1,6 @@
 package com.spendingsmanager.base.entities.security;
 
-import com.spendingsmanager.entities.Role;
-import com.spendingsmanager.entities.Spending;
+import com.spendingsmanager.base.entities.security.roles.Role;
 
 import javax.persistence.*;
 import java.util.Set;

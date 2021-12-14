@@ -1,8 +1,10 @@
-package com.spendingsmanager.base.entities.security;
+package com.spendingsmanager.base.entities;
+
+import com.spendingsmanager.base.entities.security.User;
 
 import javax.persistence.*;
 
-@Entity
+@MappedSuperclass
 public class StandardEntity {
     @Id
     @Column(name = "ID")

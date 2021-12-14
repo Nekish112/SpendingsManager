@@ -1,5 +1,7 @@
 package com.spendingsmanager.entities;
 
+import com.spendingsmanager.base.entities.StandardEntity;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -8,14 +10,10 @@ import java.util.Date;
 
 @Entity
 @Table(name = "SPENDING")
-public class Spending {
+public class Spending extends StandardEntity {
 
     private static final SimpleDateFormat STANDARD_FORMATTER = new SimpleDateFormat("YYYY-MM-DD");
 
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @ManyToOne
     private Spender spender;
     @Enumerated(EnumType.STRING)
@@ -48,14 +46,6 @@ public class Spending {
     }
 
     public Spending() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public PaymentType getPaymentType() {
         return paymentType;

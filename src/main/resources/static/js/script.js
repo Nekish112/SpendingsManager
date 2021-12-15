@@ -1,18 +1,27 @@
 $(document).ready(function (){
   $('select').formSelect();
-  let $name = $('select[name="spendingType"] option:selected');
+  let $name = $('select[name="spendingType"]');
   let $amount = $('input[name="spendingAmount"]');
   let $type = $('select[name="paymentType"]');
   let $date = $('input[name="spendingDate"]');
+
+  let $entity = {}
 
   var token = $("meta[name='_csrf']").attr("content");
   var header = $("meta[name='_csrf_header']").attr("content");
 
   $(document).ajaxSend(function(e, xhr, options) {
-    $name = $('select[name="spendingType"] option:selected');
+    $name = $('select[name="spendingType"]');
     $amount = $('input[name="spendingAmount"]');
     $type = $('select[name="paymentType"]');
     $date = $('input[name="spendingDate"]');
+
+    $entity = {}
+
+    $entity.paymentType = $type;
+    $entity.spendingType = $name;
+    $entity.date = $date;
+    $entity.amount = $amount;
 
     xhr.setRequestHeader(header, token);
   });
@@ -24,12 +33,13 @@ $('#button').click(function e() {
     xhrFields: {
       withCredentials: true
     },
-    data: {
+    data: JSON.stringify({
       "paymentType": $type.val(),
       "amount": $amount.val(),
       "spendingType": $name.val(),
       "date": $date.val()
-    },
+    }),
+    contentType : 'application/json',
     success: function(result) {
       var type_icon;
       if ($type.val() == 'CARD') {

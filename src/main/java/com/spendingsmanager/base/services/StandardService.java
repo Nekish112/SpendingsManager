@@ -1,5 +1,6 @@
 package com.spendingsmanager.base.services;
 
+import com.spendingsmanager.base.exceptions.ValidationException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class StandardService<T> {

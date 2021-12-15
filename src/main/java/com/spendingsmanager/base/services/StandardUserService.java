@@ -2,6 +2,7 @@ package com.spendingsmanager.base.services;
 
 import com.spendingsmanager.base.entities.security.User;
 import com.spendingsmanager.base.entities.security.roles.Role;
+import com.spendingsmanager.base.exceptions.ValidationException;
 import com.spendingsmanager.base.repositories.security.StandardUserRepository;
 import com.spendingsmanager.entities.Spender;
 import com.spendingsmanager.services.security.RegistrationService;
@@ -9,7 +10,7 @@ import com.spendingsmanager.services.security.RegistrationService;
 import java.util.Collections;
 
 public abstract class StandardUserService<T extends User> extends StandardService<T> {
-    public static class RegistrationException extends Exception {
+    public static class RegistrationException extends RuntimeException {
         public RegistrationException(String msg) {
             super(msg);
         }
@@ -32,6 +33,9 @@ public abstract class StandardUserService<T extends User> extends StandardServic
     }
 
     public void addUser(T user) throws RegistrationException {
+
+        validateBeforeSave(user);
+
         T userFromDb = findByUsername(user.getUsername());
 
         if (userFromDb != null) {

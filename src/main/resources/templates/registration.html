@@ -10,21 +10,20 @@
     <h2>Register new user</h2>
     <br>
 
-    <tr th:each="instance : ${errors}">
-        <td th:text="${instance}"/>
-        <br>
-    </tr>
-
     <form th:action="@{/registration}" method="post">
         <meta name="_csrf" th:content="${_csrf.token}"/>
         <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
         <div><label> Login: <input type="text" name="login"/> </label></div>
+        <span th:text="${loginError}" th:class="error"></span>
         <br>
         <div><label> Username: <input type="text" name="username"/> </label></div>
+        <p th:text="${usernameError}" th:class="error"></p>
         <br>
         <div><label> Full name: <input type="text" name="fullName"/> </label></div>
+        <p th:text="${fullNameError}" th:class="error"></p>
         <br>
         <div><label> Password: <input type="password" name="password"/> </label></div>
+        <p th:text="${passwordError}" th:class="error"></p>
         <br>
         <div>
             <button class="btn waves-effect waves-main" type="submit" name="action">Register

@@ -12,11 +12,13 @@
   <form>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <p th:text="${internalError}" th:class="error"></p>
     <div>
       <span>Тип:</span>
         <select name="paymentType">
             <option th:each="paymentType : ${paymentTypes}" th:value="${paymentType.name()}" th:text="${paymentType.getLabel()}"></option>
         </select>
+      <p th:text="${paymentTypeError}" th:class="error"></p>
     </div>
     <br>
     <div>
@@ -24,14 +26,17 @@
         <select name="spendingType">
             <option th:each="spendingType : ${spendingTypes}" th:value="${spendingType.name()}" th:text="${spendingType.getLabel()}"></option>
         </select>
+      <p th:text="${spendingTypeError}" th:class="error"></p>
     </div>
     <br>
     <div>
       <span>Дата:</span> <input type="date" name="spendingDate">
+      <p th:text="${dateError}" th:class="error"></p>
     </div>
   
     <div>
       <span>Сумма:</span> <input type="number" name="spendingAmount" placeholder="Сколько?">
+      <p th:text="${amountError}" th:class="error"></p>
     </div>
 
     <div id="button"><span>Добавить</span></div>
@@ -46,7 +51,7 @@
       <th id="date">Дата</th>
       <th style="text-align: right" id="amount">Сумма</th>
     </tr>
-    <tr th:each="spending : ${spendings}">
+    <tr th:each="spending : ${entities}">
       <td th:text="${spending.getPaymentType().getLabel()}" />
       <td th:text="${spending.getSpendingType().getLabel()}" />
       <td th:text="${spending.getDate()}" />

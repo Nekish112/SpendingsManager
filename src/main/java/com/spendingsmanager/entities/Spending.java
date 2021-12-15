@@ -1,6 +1,7 @@
 package com.spendingsmanager.entities;
 
 import com.spendingsmanager.base.entities.StandardEntity;
+import com.spendingsmanager.base.entities.security.User;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,8 +15,6 @@ public class Spending extends StandardEntity {
 
     private static final SimpleDateFormat STANDARD_FORMATTER = new SimpleDateFormat("YYYY-MM-DD");
 
-    @ManyToOne
-    private Spender spender;
     @Enumerated(EnumType.STRING)
     @Column(name = "PAYMENTTYPE")
     private PaymentType paymentType;
@@ -27,12 +26,12 @@ public class Spending extends StandardEntity {
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
-    public Spending(Spender spender,
+    public Spending(User user,
                     String paymentType,
                     String spendingType,
                     String date,
                     String amount) {
-        this.spender = spender;
+        setUser(user);
 
 
         this.paymentType = paymentType != null && !paymentType.equals("") ? PaymentType.valueOf(paymentType) : null;
@@ -40,6 +39,7 @@ public class Spending extends StandardEntity {
         try {
             this.date = date != null && !date.equals("") ? STANDARD_FORMATTER.parse(date) : null;
         } catch (ParseException e) {
+            System.out.println(e.getMessage());
             this.date = null;
         }
         this.amount = amount != null && !amount.equals("") ? new BigDecimal(amount) : null;
@@ -77,13 +77,5 @@ public class Spending extends StandardEntity {
 
     public void setSpendingType(SpendingType spendingType) {
         this.spendingType = spendingType;
-    }
-
-    public Spender getSpender() {
-        return spender;
-    }
-
-    public void setSpender(Spender spender) {
-        this.spender = spender;
     }
 }

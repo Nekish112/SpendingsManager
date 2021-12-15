@@ -1,5 +1,6 @@
 package com.spendingsmanager.services;
 
+import com.spendingsmanager.base.exceptions.ValidationException;
 import com.spendingsmanager.base.repositories.StandardDomainRepository;
 import com.spendingsmanager.base.services.StandardDomainService;
 import com.spendingsmanager.base.services.StandardUserService;

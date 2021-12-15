@@ -128,3 +128,7 @@ table td {
 .waves-effect.waves-main .waves-ripple {
   background-color: #56CC59;
 }
+
+.error {
+  color: red;
+}

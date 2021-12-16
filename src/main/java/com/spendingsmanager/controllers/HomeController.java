@@ -1,7 +1,9 @@
 package com.spendingsmanager.controllers;
 
+import com.spendingsmanager.base.builders.StandardBuilder;
 import com.spendingsmanager.base.controllers.StandardEntityController;
 import com.spendingsmanager.base.services.StandardDomainService;
+import com.spendingsmanager.builders.SpendingsBuilder;
 import com.spendingsmanager.entities.PaymentType;
 import com.spendingsmanager.entities.Spending;
 import com.spendingsmanager.entities.SpendingType;
@@ -18,6 +20,9 @@ public class HomeController extends StandardEntityController<Spending> {
     @Autowired
     private SpendingsService spendingsService;
 
+    @Autowired
+    private SpendingsBuilder spendingsBuilder;
+
     @Override
     protected void initModelData(Map<String, Object> model) {
         model.put("paymentTypes", PaymentType.values());
@@ -32,5 +37,10 @@ public class HomeController extends StandardEntityController<Spending> {
     @Override
     public StandardDomainService getStandardDomainService() {
         return spendingsService;
+    }
+
+    @Override
+    public StandardBuilder getBuilder() {
+        return spendingsBuilder;
     }
 }

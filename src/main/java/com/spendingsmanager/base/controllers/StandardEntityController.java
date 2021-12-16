@@ -1,5 +1,6 @@
 package com.spendingsmanager.base.controllers;
 
+import com.spendingsmanager.base.builders.StandardBuilder;
 import com.spendingsmanager.base.entities.StandardEntity;
 import com.spendingsmanager.base.exceptions.ValidationException;
 import com.spendingsmanager.base.services.StandardDomainService;
@@ -19,21 +20,13 @@ public abstract class StandardEntityController<T extends StandardEntity> {
     @GetMapping({"/"})
     public String getSpendings(Principal principal, Map<String, Object> model) {
         initModelData(model);
-        try {
-            List<T> entities = getStandardDomainService().findAllByUsername(principal.getName());
-            model.put("entities", entities);
-        } catch (ValidationException ex) {
-            //TODO make a good logging
-            System.out.println(ex.getMessage());
-            model.putAll(ex.getErrors());
-        }
-
+        puttingDataAtModel(model, principal);
         return getViewName();
     }
 
-    @PostMapping({"/"})
+    @PostMapping({"/save"})
     public String saveEntity(Principal principal,
-                             @RequestBody T entity,
+                             @ModelAttribute(name = "entity") T entity,
                              Map<String, Object> model) {
         try {
             getStandardDomainService().save(principal.getName(), entity);
@@ -42,8 +35,24 @@ public abstract class StandardEntityController<T extends StandardEntity> {
             model.putAll(ex.getErrors());
         }
 
-        return getViewName();
+        puttingDataAtModel(model, principal);
+
+        return "redirect:";
+    }
+
+    private void puttingDataAtModel(Map<String, Object> model, Principal principal) {
+        model.put("entity", getBuilder().build());
+        try {
+            List<T> entities = getStandardDomainService().findAllByUsername(principal.getName());
+            model.put("entities", entities);
+        } catch (ValidationException ex) {
+            //TODO make a good logging
+            System.out.println(ex.getMessage());
+            model.putAll(ex.getErrors());
+        }
     }
 
     public abstract StandardDomainService getStandardDomainService();
+
+    public abstract StandardBuilder getBuilder();
 }

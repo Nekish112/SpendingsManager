@@ -18,7 +18,7 @@ public abstract class StandardEntityController<T extends StandardEntity> {
     protected abstract String getViewName();
 
     @GetMapping({"/"})
-    public String getSpendings(Principal principal, Map<String, Object> model) {
+    public String getEntities(Principal principal, Map<String, Object> model) {
         initModelData(model);
         puttingDataAtModel(model, principal);
         return getViewName();

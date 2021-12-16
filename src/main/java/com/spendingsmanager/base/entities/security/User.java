@@ -1,5 +1,6 @@
 package com.spendingsmanager.base.entities.security;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spendingsmanager.base.entities.security.roles.Role;
 
 import javax.persistence.*;
@@ -14,6 +15,8 @@ public abstract class User {
     private Long id;
     @Column(name = "USERNAME")
     private String username;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "PASSWORD")
     private String password;
     @Column(name = "ACTIVE")

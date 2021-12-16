@@ -9,7 +9,7 @@
   <h2>Новая трата:</h2>
 
   <div id="form-box">
-  <form action="#" th:action="@{/save}" th:object="${entity}" method="post">
+  <form action="#" th:action="@{save}" th:object="${entity}" method="post">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <p th:text="${internalError}" th:class="error"></p>

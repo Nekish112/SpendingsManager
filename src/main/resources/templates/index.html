@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" th:include="layout::layout">
 <head>
-  <title th:fragment="header">Менеджер расходов</title>
+  <title th:fragment="header">Expense Manager</title>
 </head>
 <body>
 
 <div th:fragment="content">
-  <h2>Новая трата:</h2>
+  <h2>New expense:</h2>
 
   <div id="form-box">
   <form>
@@ -14,7 +14,7 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <p th:text="${internalError}" th:class="error"></p>
     <div>
-      <span>Тип:</span>
+      <span>Type:</span>
         <select name="paymentType">
             <option th:each="paymentType : ${paymentTypes}" th:value="${paymentType.name()}" th:text="${paymentType.getLabel()}"></option>
         </select>
@@ -22,7 +22,7 @@
     </div>
     <br>
     <div>
-      <span>Что:</span>
+      <span>What:</span>
         <select name="spendingType">
             <option th:each="spendingType : ${spendingTypes}" th:value="${spendingType.name()}" th:text="${spendingType.getLabel()}"></option>
         </select>
@@ -30,26 +30,26 @@
     </div>
     <br>
     <div>
-      <span>Дата:</span> <input type="date" name="spendingDate">
+      <span>Date:</span> <input type="date" name="spendingDate">
       <p th:text="${dateError}" th:class="error"></p>
     </div>
-  
+    <br>
     <div>
-      <span>Сумма:</span> <input type="number" name="spendingAmount" placeholder="Сколько?">
+      <span>Amount:</span> <input type="number" name="spendingAmount" placeholder="Сколько?">
       <p th:text="${amountError}" th:class="error"></p>
     </div>
-
-    <div id="button"><span>Добавить</span></div>
+    <br>
+    <div id="button"><span>Add</span></div>
 
   </form>
   </div>
 
   <table>
     <tr>
-      <th id="type" class="center">Тип</th>
-      <th>Что</th>
-      <th id="date">Дата</th>
-      <th style="text-align: right" id="amount">Сумма</th>
+      <th id="type" class="center">Type</th>
+      <th>What</th>
+      <th id="date">Date</th>
+      <th style="text-align: right" id="amount">Amount</th>
     </tr>
     <tr th:each="spending : ${entities}">
       <td th:text="${spending.getPaymentType().getLabel()}" />
@@ -58,7 +58,7 @@
       <td th:text="${spending.getAmount()}" />
     </tr>
     <tr id="if-empty">
-      <td colspan="4"><span>Здесь будут ваши расходы!</span></td>
+      <td colspan="4"><span>Here you will see your expenses!</span></td>
     </tr>
 
   </table>

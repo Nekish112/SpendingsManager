@@ -1,4 +1,4 @@
-package com.spendingsmanager.dao;
+package com.spendingsmanager.repositories;
 
 import com.spendingsmanager.base.repositories.security.StandardUserRepository;
 import com.spendingsmanager.entities.Spender;

@@ -1,13 +1,13 @@
 package com.spendingsmanager.builders;
 
 import com.spendingsmanager.base.builders.StandardBuilder;
-import com.spendingsmanager.entities.Spending;
+import com.spendingsmanager.entities.Counting;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SpendingsBuilder implements StandardBuilder<Spending> {
+public class CountingBuilder implements StandardBuilder<Counting> {
     @Override
-    public Spending build() {
-        return new Spending();
+    public Counting build() {
+        return new Counting();
     }
 }

@@ -1,10 +1,9 @@
 package com.spendingsmanager.services;
 
-import com.spendingsmanager.base.exceptions.ValidationException;
 import com.spendingsmanager.base.repositories.StandardDomainRepository;
 import com.spendingsmanager.base.services.StandardDomainService;
 import com.spendingsmanager.base.services.StandardUserService;
-import com.spendingsmanager.dao.SpendingRepository;
+import com.spendingsmanager.repositories.SpendingRepository;
 import com.spendingsmanager.base.services.validators.StandardValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

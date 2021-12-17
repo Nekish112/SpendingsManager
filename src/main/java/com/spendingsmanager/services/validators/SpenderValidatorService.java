@@ -9,17 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.spendingsmanager.constants.ValidatorConstants.*;
+
 @Service
 public class SpenderValidatorService implements StandardValidator<Spender> {
-
-    // TODO move to const class
-    private static final String USERNAME_ERROR = "Username must be more than 3 and less than 20 symbols";
-
-    private static final String LOGIN_ERROR = "Login must be more than 3 and less than 20 symbols";
-
-    private static final String PASSWORD_ERROR = "Password must be more than 6 and less than 20 symbols";
-
-    private static final String FULL_NAME_ERROR = "Full name must be more than 10 and less than 50 symbols";
 
     @Override
     public void validate(Spender object) {

@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.spendingsmanager.constants.ValidatorConstants.*;
+
 @Service
 public class UsernameValidatorService implements StandardValidator<String> {
-
-    private static final String USERNAME_ERROR = "Username must be more than 3 and less than 20 symbols";
 
     @Override
     public void validate(String object) {

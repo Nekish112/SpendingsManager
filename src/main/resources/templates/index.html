@@ -9,21 +9,22 @@
   <h2>Analytics</h2>
 
   <div id="form-box">
-  <form>
+  <form action="#" th:action="@{filter}" method="post">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <p th:text="${internalError}" th:class="error"></p>
     <div>
-      <span>Start date:</span> <input type="date" name="startDate">
+      <span>Start date:</span> <input type="date" name="startDate"  th:value="${#dates.format(startDate, 'yyyy-MM-dd')}">
       <p th:text="${dateError}" th:class="error"></p>
     </div>
     <br>
     <div>
-      <span>End date:</span> <input type="date" name="endDate">
+      <span>End date:</span> <input type="date" name="endDate" th:value="${#dates.format(endDate, 'yyyy-MM-dd')}">
       <p th:text="${dateError}" th:class="error"></p>
     </div>
 	<br>
-    <div id="button"><span>View</span></div>
+    <button class="btn waves-effect waves-main" type="submit" name="action">View
+    </button>
 
   </form>
   </div>
@@ -49,6 +50,7 @@
     </tr>
     <tr id="if-empty">
       <td colspan="4"><span>Overall: </span></td>
+      <td th:text="${overallAmount}"/>
     </tr>
   </table>
 

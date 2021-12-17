@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class CountingService extends StandardDomainService<Counting> {
@@ -46,7 +49,21 @@ public class CountingService extends StandardDomainService<Counting> {
         result.addAll(incomeService.findAllByUser(user));
         result.addAll(spendingsService.findAllByUser(user));
 
-        result.sort(Comparator.comparing(Counting::getDate).reversed());
+        result.sort(Comparator.nullsFirst(Comparator.comparing(Counting::getDate, Comparator.nullsFirst(Comparator.naturalOrder())).reversed()));
+
+        return result;
+    }
+
+    public List<Counting> filterByDate(String username, Date startDate, Date endDate) {
+        User user = spenderService.findByUsername(username);
+
+        List<Counting> result = findAllByUser(user);
+
+        result = result
+                .stream()
+                .filter(obj -> obj != null && obj.getDate() != null && (startDate == null || obj.getDate().compareTo(startDate) >= 0))
+                .filter(obj -> obj != null && obj.getDate() != null && (endDate == null || obj.getDate().compareTo(endDate) <= 0))
+        .collect(Collectors.toList());
 
         return result;
     }

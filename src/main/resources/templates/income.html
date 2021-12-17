@@ -9,7 +9,7 @@
   <h2>New income:</h2>
 
   <div id="form-box">
-  <form>
+  <form action="#" th:action="@{save}" th:object="${entity}" method="post">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <p th:text="${internalError}" th:class="error"></p>
@@ -30,16 +30,17 @@
     </div>
     <br>
     <div>
-      <span>Date:</span> <input type="date" name="incomeDate">
+      <span>Date:</span> <input type="date" name="incomeDate" th:field="*{date}">
       <p th:text="${dateError}" th:class="error"></p>
     </div>
     <br>
     <div>
-      <span>Amount:</span> <input type="number" name="incomeAmount" placeholder="Сколько?">
+      <span>Amount:</span> <input type="number" name="incomeAmount" placeholder="Сколько?" th:field="*{amount}">
       <p th:text="${amountError}" th:class="error"></p>
     </div>
 	<br>
-    <div id="button"><span>Add</span></div>
+    <button class="btn waves-effect waves-main" type="submit" name="action">Add
+    </button>
 
   </form>
   </div>
@@ -52,9 +53,13 @@
       <th style="text-align: right" id="amount">Amount</th>
     </tr>
     <tr th:each="income : ${entities}">
-      <td th:text="${income.getPaymentType().getLabel()}" />
+      <td th:switch="${income.getPaymentType().name()}">
+        <i th:case="'CARD'" class='fa fa-credit-card'></i>
+        <i th:case="'CASH'" class='fa fa-money'></i>
+        <i th:case="'OTHER'" class='fa fa-question-circle'></i>
+      </td>
       <td th:text="${income.getIncomeType().getLabel()}" />
-      <td th:text="${income.getDate()}" />
+      <td th:text="${#dates.format(income.getDate(), 'yyyy-MM-dd')}" />
       <td th:text="${income.getAmount()}" />
     </tr>
     <tr id="if-empty">

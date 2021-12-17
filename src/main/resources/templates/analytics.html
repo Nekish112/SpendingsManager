@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" th:include="layout::layout">
+<head>
+  <title th:fragment="header">Spendings Manager</title>
+</head>
+<body>
+
+<div th:fragment="content">
+  <h2>Analytics</h2>
+
+  <div id="form-box">
+  <form>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <p th:text="${internalError}" th:class="error"></p>
+    <div>
+      <span>Start date:</span> <input type="date" name="startDate">
+      <p th:text="${dateError}" th:class="error"></p>
+    </div>
+    <br>
+    <div>
+      <span>End date:</span> <input type="date" name="endDate">
+      <p th:text="${dateError}" th:class="error"></p>
+    </div>
+	<br>
+    <div id="button"><span>View</span></div>
+
+  </form>
+  </div>
+
+  <table>
+    <tr>
+      <th id="type" class="center">Type</th>
+      <th>What</th>
+      <th id="date">Date</th>
+      <th style="text-align: right" id="amount">Amount</th>
+    </tr>
+    <tr id="if-empty">
+      <td colspan="4"><span>Overall: </span></td>
+    </tr>
+  </table>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</div>
+</body>
+</html>

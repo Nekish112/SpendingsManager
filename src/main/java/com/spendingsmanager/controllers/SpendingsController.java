@@ -18,7 +18,7 @@ import java.util.Map;
 @RequestMapping("/spendings")
 public class SpendingsController extends StandardEntityController<Spending> {
 
-    private static String VIEW_NAME = "index";
+    private static String VIEW_NAME = "spendings";
 
     @Autowired
     private SpendingsService spendingsService;

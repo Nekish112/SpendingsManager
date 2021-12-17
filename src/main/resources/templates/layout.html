@@ -15,12 +15,11 @@
 
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo"><img class="responsive-img" id="logo" src="/images/logo.png"/>&nbspSpendings Manager</a>
+        <a th:href="@{/}" class="brand-logo"><img class="responsive-img" id="logo" src="/images/logo.png"/>&nbspSpendings Manager</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/index">Expense</a></li>
-            <li><a href="/income">Income</a></li>
-            <li><a href="/analytics">Analytics</a></li>
-            <li><a href="/login">Logout</a></li>
+            <li><a th:href="@{/spendings}">History</a></li>
+            <li><a th:href="@{/income}">Planner</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
         </ul>
     </div>
 </nav>

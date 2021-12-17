@@ -1,8 +1,9 @@
 package com.spendingsmanager.entities;
 
 public enum IncomeType {
-    // TODO Fill in
-    OTHER("Другое");
+    CHECK("Check"),
+    DEPOSIT("Deposit"),
+    OTHER("Other");
 
     private String label;
 

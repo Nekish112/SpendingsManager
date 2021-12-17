@@ -1,7 +1,7 @@
 package com.spendingsmanager.entities;
 
 public enum PaymentType {
-    CARD("Карта"),
+    CARD("Card"),
     CASH("Наличные"),
     OTHER("Другое");
 

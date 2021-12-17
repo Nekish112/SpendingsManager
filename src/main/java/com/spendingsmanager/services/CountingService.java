@@ -5,7 +5,7 @@ import com.spendingsmanager.base.repositories.StandardDomainRepository;
 import com.spendingsmanager.base.services.StandardDomainService;
 import com.spendingsmanager.base.services.StandardUserService;
 import com.spendingsmanager.entities.Counting;
-import com.spendingsmanager.repositories.CountingRepository;
+//import com.spendingsmanager.repositories.CountingRepository;
 import com.spendingsmanager.services.validators.CountingValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +19,6 @@ public class CountingService extends StandardDomainService<Counting> {
 
     @Autowired
     private SpenderService spenderService;
-
-    @Autowired
-    private CountingRepository countingRepository;
 
     @Autowired
     private CountingValidatorService countingValidatorService;
@@ -39,7 +36,7 @@ public class CountingService extends StandardDomainService<Counting> {
 
     @Override
     protected StandardDomainRepository getRepository() {
-        return countingRepository;
+        return null;
     }
 
     @Override
@@ -61,7 +58,7 @@ public class CountingService extends StandardDomainService<Counting> {
         result.addAll(incomeService.findAllByUsername(username));
         result.addAll(spendingsService.findAllByUsername(username));
 
-        result.sort(Comparator.comparing(Counting::getDate).reversed());
+        result.sort(Comparator.nullsFirst(Comparator.comparing(Counting::getDate, Comparator.nullsFirst(Comparator.naturalOrder())).reversed()));
 
         return result;
     }

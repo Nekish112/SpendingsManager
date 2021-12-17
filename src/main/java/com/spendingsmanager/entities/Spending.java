@@ -47,7 +47,12 @@ public class Spending extends Counting {
     }
 
     @Override
-    public String getSubject() {
+    public String getSubjectLabel() {
         return spendingType != null ? spendingType.getLabel() : null;
+    }
+
+    @Override
+    public String getKindLabel() {
+        return "Spending";
     }
 }

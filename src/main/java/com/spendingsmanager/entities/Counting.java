@@ -46,7 +46,9 @@ public class Counting extends StandardEntity {
         this.amount = amount;
     }
 
-    public String getSubject() {
+    public String getSubjectLabel() {
         return null;
     }
+
+    public String getKindLabel() {return null;}
 }

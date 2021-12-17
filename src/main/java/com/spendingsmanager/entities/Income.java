@@ -34,7 +34,7 @@ public class Income extends Counting {
     public Income() {}
 
     @Override
-    public String getSubject() {
+    public String getSubjectLabel() {
         return incomeType != null ? incomeType.getLabel() : null;
     }
 
@@ -44,5 +44,10 @@ public class Income extends Counting {
 
     public void setIncomeType(IncomeType incomeType) {
         this.incomeType = incomeType;
+    }
+
+    @Override
+    public String getKindLabel() {
+        return "Income";
     }
 }

@@ -2,6 +2,7 @@ package com.spendingsmanager.entities;
 
 import com.spendingsmanager.base.entities.StandardEntity;
 import com.spendingsmanager.base.entities.security.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ public class Spending extends StandardEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "SPENDINGTYPE")
     private SpendingType spendingType;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "DATE")
     private Date date;
     @Column(name = "AMOUNT")

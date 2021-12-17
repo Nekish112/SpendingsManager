@@ -9,13 +9,13 @@
   <h2>New expense:</h2>
 
   <div id="form-box">
-  <form>
+  <form action="#" th:action="@{save}" th:object="${entity}" method="post">
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <p th:text="${internalError}" th:class="error"></p>
     <div>
       <span>Type:</span>
-        <select name="paymentType">
+      <select name="paymentType" th:field="*{paymentType}">
             <option th:each="paymentType : ${paymentTypes}" th:value="${paymentType.name()}" th:text="${paymentType.getLabel()}"></option>
         </select>
       <p th:text="${paymentTypeError}" th:class="error"></p>
@@ -23,23 +23,24 @@
     <br>
     <div>
       <span>What:</span>
-        <select name="spendingType">
+      <select name="spendingType" th:field="*{spendingType}">
             <option th:each="spendingType : ${spendingTypes}" th:value="${spendingType.name()}" th:text="${spendingType.getLabel()}"></option>
         </select>
       <p th:text="${spendingTypeError}" th:class="error"></p>
     </div>
     <br>
     <div>
-      <span>Date:</span> <input type="date" name="spendingDate">
+      <span>Date:</span> <input type="date" name="spendingDate" th:field="*{date}">
       <p th:text="${dateError}" th:class="error"></p>
     </div>
     <br>
     <div>
-      <span>Amount:</span> <input type="number" name="spendingAmount" placeholder="Сколько?">
+      <span>Amount:</span> <input type="number" name="spendingAmount" placeholder="Сколько?" th:field="*{amount}">
       <p th:text="${amountError}" th:class="error"></p>
     </div>
-    <br>
-    <div id="button"><span>Add</span></div>
+
+    <button class="btn waves-effect waves-main" type="submit" name="action">Add
+    </button>
 
   </form>
   </div>
@@ -52,9 +53,13 @@
       <th style="text-align: right" id="amount">Amount</th>
     </tr>
     <tr th:each="spending : ${entities}">
-      <td th:text="${spending.getPaymentType().getLabel()}" />
+      <td th:switch="${spending.getPaymentType().name()}">
+        <i th:case="'CARD'" class='fa fa-credit-card'></i>
+        <i th:case="'CASH'" class='fa fa-money'></i>
+        <i th:case="'OTHER'" class='fa fa-question-circle'></i>
+      </td>
       <td th:text="${spending.getSpendingType().getLabel()}" />
-      <td th:text="${spending.getDate()}" />
+      <td th:text="${#dates.format(spending.getDate(), 'yyyy-MM-dd')}" />
       <td th:text="${spending.getAmount()}" />
     </tr>
     <tr id="if-empty">

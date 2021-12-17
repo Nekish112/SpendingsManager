@@ -1,22 +1,30 @@
 package com.spendingsmanager.controllers;
 
+import com.spendingsmanager.base.builders.StandardBuilder;
 import com.spendingsmanager.base.controllers.StandardEntityController;
 import com.spendingsmanager.base.services.StandardDomainService;
+import com.spendingsmanager.builders.SpendingsBuilder;
 import com.spendingsmanager.entities.PaymentType;
 import com.spendingsmanager.entities.Spending;
 import com.spendingsmanager.entities.SpendingType;
 import com.spendingsmanager.services.SpendingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.Map;
 
 @Controller
-public class HomeController extends StandardEntityController<Spending> {
+@RequestMapping("/spendings")
+public class SpendingsController extends StandardEntityController<Spending> {
 
     private static String VIEW_NAME = "index";
 
     @Autowired
     private SpendingsService spendingsService;
+
+    @Autowired
+    private SpendingsBuilder spendingsBuilder;
 
     @Override
     protected void initModelData(Map<String, Object> model) {
@@ -32,5 +40,10 @@ public class HomeController extends StandardEntityController<Spending> {
     @Override
     public StandardDomainService getStandardDomainService() {
         return spendingsService;
+    }
+
+    @Override
+    public StandardBuilder getBuilder() {
+        return spendingsBuilder;
     }
 }

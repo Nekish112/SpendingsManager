@@ -20,20 +20,20 @@ public class SpendingValidatorService implements StandardValidator<Spending> {
     @Override
     public void validate(Spending object) {
 
-        Map<String, String> errors = new HashMap<>();
-
-        try {
-            countingValidatorService.validate(object);
-        } catch (ValidationException ex) {
-            errors.putAll(ex.getErrors());
-        }
-
-        if (object.getSpendingType() == null) {
-            errors.put("spendingTypeError", SPENDING_TYPE_ERROR);
-        }
-
-        if (errors != null && errors.size() > 0) {
-            throw new ValidationException(errors);
-        }
+//        Map<String, String> errors = new HashMap<>();
+//
+//        try {
+//            countingValidatorService.validate(object);
+//        } catch (ValidationException ex) {
+//            errors.putAll(ex.getErrors());
+//        }
+//
+//        if (object.getSpendingType() == null) {
+//            errors.put("spendingTypeError", SPENDING_TYPE_ERROR);
+//        }
+//
+//        if (errors != null && errors.size() > 0) {
+//            throw new ValidationException(errors);
+//        }
     }
 }

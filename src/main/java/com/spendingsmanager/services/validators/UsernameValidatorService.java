@@ -14,6 +14,7 @@ public class UsernameValidatorService implements StandardValidator<String> {
 
     @Override
     public void validate(String object) {
+        
 //        Map<String, String> errors = new HashMap<>();
 //
 //        if (!(object != null && object.length() > 3 && object.length() < 20)) {
